@@ -1,12 +1,17 @@
 package br.com.daniel.bytebank.modelo
 
+import br.com.daniel.bytebank.Excpetions.SaldoInsuficienteException
 import java.lang.IllegalArgumentException
 
 abstract class Conta(
         val titular: Cliente,
         val numero: Int,
-        saldo: Double = 0.0) { //construtor primario (ideal quando for apenas inicialização.
-
+        saldo: Double = 0.0) : IAutentica by titular {
+    /*
+    Com apenas a syntax Autenticavel by titular, é feita a delegação de implementação.
+    A restrição nesse caso é que precisamos operar com properties val,
+    pois não é possível modificar a implementação depois de criarmos uma conta.
+*/
     var saldo = saldo
         private set  //properties
 
@@ -23,7 +28,7 @@ abstract class Conta(
         if (valor <= this.saldo && valor > 0) {
             this.saldo -= valor
         } else {
-            throw IllegalArgumentException("Falha ao realizar o saque")
+            throw SaldoInsuficienteException("Valor inválido ou Saldo Insuficiente")
         }
     }
 

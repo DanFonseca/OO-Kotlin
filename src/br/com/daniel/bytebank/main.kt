@@ -1,26 +1,23 @@
 package br.com.daniel.bytebank
 
-import br.com.daniel.bytebank.modelo.Cliente
 import br.com.daniel.bytebank.modelo.ContaPoupanca
-import br.com.daniel.bytebank.modelo.Endereco
+import br.com.daniel.bytebank.teste.testePilha
 
 fun main (){
-    val poupanca =
-            ContaPoupanca (numero = 100, saldo = 500.0,
-                    titular = Cliente(
-                    nome = "Daniel",
-                    email = "daniel@gmail.com",
-                    senha = 123,
 
-                    endereco = Endereco(logradouro = "Paulita",
-                    numero = 100,
-                    cep = "04844221",
-                    bairro = "Paulista",
-                    complemento = "",
-                    estado = "SP")))
+    testePilha().funcao1()
+    
+    //try expressioons
+    val entrada = "1"
 
-    print(verifica(poupanca))
+    val valorConvertido = try {
+        entrada.toDouble()
+    }catch (e: RuntimeException){
+        null
+    }
 
+    //Elvis operator to verify if the value is null
+    println(valorConvertido ?: "Valor inválido")
 }
 
 fun verifica (obj: Any?) : Any?{

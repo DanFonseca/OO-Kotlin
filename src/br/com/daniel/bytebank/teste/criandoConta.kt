@@ -1,6 +1,7 @@
 package br.com.daniel.bytebank.teste
 
 import br.com.daniel.bytebank.modelo.*
+import br.com.daniel.bytebank.verifica
 
 fun criarConta() {
 
@@ -19,6 +20,24 @@ fun criarConta() {
             numero = 2165,
             saldo = 7000.0
     )
+
+    val poupanca =
+            ContaPoupanca (numero = 100, saldo = 500.0,
+                    titular = Cliente(
+                            nome = "Daniel",
+                            email = "daniel@gmail.com",
+                            senha = 123,
+
+                            endereco = Endereco(logradouro = "Paulita",
+                                    numero = 100,
+                                    cep = "04844221",
+                                    bairro = "Paulista",
+                                    complemento = "",
+                                    estado = "SP")))
+    print(verifica(poupanca))
+
+
+
 
     val list = mutableListOf<Conta>(conta1, conta2, conta3)
     println("total de contas criadas ${Conta.total}")
